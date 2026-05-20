@@ -1,0 +1,331 @@
+.profile-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 50%, #0a1c12, #051007);
+  padding: 2rem;
+}
+
+/* Auth container */
+.auth-container {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 3rem;
+  background: rgba(26, 77, 46, 0.4);
+  border-radius: 1rem;
+  border: 1px solid rgba(201, 160, 61, 0.3);
+}
+
+.auth-header h1 {
+  font-size: 1.5rem;
+  color: #c9a03d;
+  margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+  color: #aaa;
+  margin-bottom: 2rem;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.auth-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-btn.login {
+  background: linear-gradient(135deg, #c9a03d, #ffd700);
+  color: #0a1c12;
+}
+
+.auth-btn.register {
+  background: #1a4d2e;
+  border: 1px solid #c9a03d;
+  color: #c9a03d;
+}
+
+.auth-features {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+/* Profile logged in */
+.profile-page.logged-in {
+  padding: 2rem;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  background: rgba(26, 77, 46, 0.5);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.profile-avatar-section {
+  position: relative;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, #c9a03d, #ffd700);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  border: 3px solid #c9a03d;
+}
+
+.edit-avatar-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  background: #c9a03d;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-username {
+  font-size: 1.5rem;
+  color: #c9a03d;
+  margin-bottom: 0.25rem;
+}
+
+.profile-email {
+  color: #aaa;
+  margin-bottom: 0.25rem;
+}
+
+.profile-member {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.settings-btn, .logout-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.settings-btn {
+  background: #1a4d2e;
+  border: 1px solid #c9a03d;
+  color: #c9a03d;
+}
+
+.logout-btn {
+  background: #f44336;
+  color: white;
+}
+
+.profile-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: rgba(26, 77, 46, 0.4);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffd700;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: #aaa;
+}
+
+.profile-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(201, 160, 61, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+.tab {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab.active {
+  color: #c9a03d;
+  border-bottom: 2px solid #c9a03d;
+}
+
+.stats-detailed {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.stats-group {
+  background: rgba(26, 77, 46, 0.3);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.stats-group h3 {
+  color: #c9a03d;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.progress-item {
+  margin-bottom: 1rem;
+}
+
+.progress-item > span {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: #ddd;
+  margin-bottom: 0.25rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #1a4d2e;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #c9a03d, #ffd700);
+  transition: width 0.3s ease;
+}
+
+.game-stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(201, 160, 61, 0.1);
+  font-size: 0.8rem;
+}
+
+.session-card {
+  background: rgba(26, 77, 46, 0.3);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.session-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.session-game {
+  font-weight: bold;
+  color: #c9a03d;
+}
+
+.session-mode.vanilla {
+  color: #2196f3;
+}
+
+.session-mode.rando {
+  color: #ff9800;
+}
+
+.session-details {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.7rem;
+  color: #aaa;
+  flex-wrap: wrap;
+}
+
+.empty-sessions {
+  text-align: center;
+  padding: 3rem;
+}
+
+.empty-sessions span {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .profile-page {
+    padding: 1rem;
+  }
+  
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .profile-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .stats-detailed {
+    grid-template-columns: 1fr;
+  }
+  
+  .profile-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+}

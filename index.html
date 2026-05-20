@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zelda N64 Hub - Randomizer Tracker</title>
+    <style>
+      /* Évite un flash blanc au chargement */
+      body {
+        margin: 0;
+        background: #051007;
+      }
+    </style>
+     <!-- Charger le CSS EmulatorJS -->
+    <link rel="stylesheet" href="https://cdn.emulatorjs.org/stable/data/emulator.min.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <!-- 1️⃣ CHARGER EMULATORJS EN PREMIER (script normal) -->
+    <script src="https://cdn.emulatorjs.org/stable/data/loader.js"></script>
+    
+    <!-- 2️⃣ PUIS votre application React (module) -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

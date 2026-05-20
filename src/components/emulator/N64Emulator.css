@@ -1,0 +1,380 @@
+/* src/components/emulator/N64Emulator.css */
+
+.n64-emulator-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #0a0a0a;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.n64-emulator-canvas-container {
+  position: relative;
+  flex: 1;
+  background: #000;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.n64-emulator-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #000;
+}
+
+/* Loading overlay */
+.n64-emulator-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 20;
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #1a4d2e;
+  border-top-color: #c9a03d;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.n64-emulator-loading span {
+  color: #c9a03d;
+  font-size: 0.9rem;
+}
+
+/* Error overlay */
+.n64-emulator-error {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  background: rgba(244, 67, 54, 0.95);
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  z-index: 20;
+}
+
+.n64-emulator-error button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Contrôles flottants */
+.n64-emulator-controls-floating {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 15;
+}
+
+.floating-btn {
+  width: 36px;
+  height: 36px;
+  background: rgba(10, 28, 18, 0.85);
+  backdrop-filter: blur(4px);
+  border: 1px solid #c9a03d;
+  border-radius: 50%;
+  color: #c9a03d;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-btn:hover {
+  background: #2a5f3f;
+  transform: scale(1.05);
+}
+
+/* Panneau de contrôles */
+.n64-emulator-controls-panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.75rem;
+  background: rgba(10, 28, 18, 0.9);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid #c9a03d;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  z-index: 15;
+}
+
+.controls-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.control-btn {
+  padding: 0.4rem 0.8rem;
+  background: #1a4d2e;
+  border: 1px solid #c9a03d;
+  border-radius: 0.5rem;
+  color: #c9a03d;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+  background: #2a5f3f;
+  transform: translateY(-1px);
+}
+
+.fps-counter {
+  font-size: 0.7rem;
+  color: #4caf50;
+  font-family: monospace;
+  background: #0a1c12;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+}
+
+/* Aide clavier */
+.keyboard-help {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background: #0a1c12;
+  border: 2px solid #c9a03d;
+  border-radius: 0.75rem;
+  z-index: 25;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.help-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(201, 160, 61, 0.3);
+}
+
+.help-header h4 {
+  color: #c9a03d;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.help-header button {
+  background: none;
+  border: none;
+  color: #c9a03d;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.help-content {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.help-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #ddd;
+}
+
+.help-key {
+  background: #1a4d2e;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  color: #c9a03d;
+  border: 1px solid #c9a03d;
+  font-size: 0.7rem;
+}
+
+/* Slots de sauvegarde */
+.save-slots {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  background: #0a1c12;
+  border: 2px solid #c9a03d;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  z-index: 25;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.save-slots h4 {
+  color: #c9a03d;
+  margin: 0 0 0.75rem 0;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.save-slot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid rgba(201, 160, 61, 0.2);
+  color: #ddd;
+  font-size: 0.8rem;
+}
+
+.slot-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.slot-buttons button {
+  padding: 0.2rem 0.6rem;
+  background: #1a4d2e;
+  border: 1px solid #c9a03d;
+  border-radius: 0.25rem;
+  color: #c9a03d;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: all 0.2s ease;
+}
+
+.slot-buttons button:hover:not(:disabled) {
+  background: #2a5f3f;
+}
+
+.slot-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.close-slots {
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.4rem;
+  background: #c9a03d;
+  border: none;
+  border-radius: 0.5rem;
+  color: #0a1c12;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.close-slots:hover {
+  background: #ffd700;
+}
+
+/* Informations du jeu */
+.n64-emulator-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: rgba(10, 28, 18, 0.9);
+  border-top: 1px solid rgba(201, 160, 61, 0.3);
+  font-size: 0.75rem;
+}
+
+.game-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #c9a03d;
+}
+
+.game-icon {
+  font-size: 1rem;
+}
+
+.game-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #aaa;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-dot.playing {
+  background: #4caf50;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.status-dot.paused {
+  background: #f44336;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .n64-emulator-controls-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .controls-row {
+    justify-content: center;
+  }
+  
+  .floating-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+  
+  .keyboard-help {
+    width: 260px;
+  }
+  
+  .save-slots {
+    width: 260px;
+  }
+  
+  .save-slot {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

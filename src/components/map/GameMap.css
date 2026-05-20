@@ -1,0 +1,439 @@
+.game-map-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 28, 18, 0.8);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(26, 77, 46, 0.5);
+  border-bottom: 1px solid rgba(201, 160, 61, 0.3);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.map-title-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.map-title {
+  font-size: 1rem;
+  color: #c9a03d;
+  margin: 0;
+}
+
+.game-selector {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.game-select-btn {
+  padding: 0.25rem 0.75rem;
+  background: #1a4d2e;
+  border: 1px solid #2a5f3f;
+  border-radius: 2rem;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: all 0.3s ease;
+}
+
+.game-select-btn.active {
+  background: var(--game-color, #c9a03d);
+  color: #0a1c12;
+  border-color: var(--game-color, #c9a03d);
+}
+
+.map-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.map-zoom-btn, .map-reset-btn {
+  width: 32px;
+  height: 32px;
+  background: #1a4d2e;
+  border: 1px solid #c9a03d;
+  border-radius: 0.25rem;
+  color: #c9a03d;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.map-filters {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(10, 28, 18, 0.5);
+  border-bottom: 1px solid rgba(201, 160, 61, 0.2);
+}
+
+.filter-btn {
+  padding: 0.3rem 0.8rem;
+  background: #1a4d2e;
+  border: 1px solid #2a5f3f;
+  border-radius: 2rem;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+  background: #c9a03d;
+  color: #0a1c12;
+}
+
+.map-grid {
+  position: relative;
+  flex: 1;
+  min-height: 450px;
+  background: linear-gradient(135deg, #0d2818, #0a1c12);
+  background-image: 
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,50 Q30,30 50,50 T90,50" stroke="rgba(201,160,61,0.05)" fill="none" stroke-width="0.5"/><path d="M10,70 Q30,50 50,70 T90,70" stroke="rgba(201,160,61,0.05)" fill="none" stroke-width="0.5"/></svg>'),
+    repeating-linear-gradient(45deg, rgba(201,160,61,0.02) 0px, rgba(201,160,61,0.02) 2px, transparent 2px, transparent 8px);
+  background-repeat: repeat;
+  overflow: hidden;
+}
+
+.map-location {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.location-icon {
+  width: 36px;
+  height: 36px;
+  background: #1a4d2e;
+  border: 2px solid #c9a03d;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.map-location.dungeon .location-icon {
+  width: 42px;
+  height: 42px;
+  background: #3f2a1a;
+  border-color: #ff9800;
+  box-shadow: 0 0 10px rgba(255,152,0,0.3);
+}
+
+.map-location.unlocked .location-icon {
+  background: #2a5f3f;
+  box-shadow: 0 0 10px rgba(201, 160, 61, 0.3);
+}
+
+.map-location.locked .location-icon {
+  opacity: 0.4;
+  filter: grayscale(0.6);
+}
+
+.map-location.completed .location-icon {
+  background: #4caf50;
+  border-color: #ffd700;
+}
+
+.location-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0a1c12;
+  color: #c9a03d;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.65rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  border: 1px solid #c9a03d;
+  z-index: 20;
+}
+
+.map-location:hover .location-tooltip {
+  opacity: 1;
+}
+
+.location-check {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  width: 16px;
+  height: 16px;
+  background: #4caf50;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: white;
+}
+
+.location-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  background: #0a1c12;
+  border: 2px solid #c9a03d;
+  border-radius: 0.75rem;
+  z-index: 1000;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.location-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(201, 160, 61, 0.3);
+  position: relative;
+}
+
+.location-modal-icon {
+  font-size: 1.5rem;
+}
+
+.location-modal-header h3 {
+  color: #c9a03d;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.location-modal-close {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  background: none;
+  border: none;
+  color: #c9a03d;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.location-modal-body {
+  padding: 0.75rem;
+}
+
+.location-region {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  font-size: 0.7rem;
+  color: #aaa;
+}
+
+.location-type {
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.65rem;
+}
+
+.location-type.main {
+  background: rgba(33, 150, 243, 0.2);
+  color: #2196f3;
+}
+
+.location-type.dungeon {
+  background: rgba(255, 152, 0, 0.2);
+  color: #ff9800;
+}
+
+.location-checks h4, .location-requirements h4 {
+  font-size: 0.7rem;
+  color: #c9a03d;
+  margin: 0 0 0.5rem 0;
+}
+
+.location-checks ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.75rem 0;
+}
+
+.location-checks li {
+  font-size: 0.65rem;
+  color: #ddd;
+  padding: 0.2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.check-bullet {
+  color: #ffd700;
+}
+
+.requirements-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.requirement-badge {
+  padding: 0.15rem 0.4rem;
+  background: rgba(244, 67, 54, 0.2);
+  border-radius: 0.25rem;
+  font-size: 0.6rem;
+  color: #f44336;
+}
+
+.map-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  background: rgba(10, 28, 18, 0.5);
+  border-top: 1px solid rgba(201, 160, 61, 0.3);
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.6rem;
+  color: #aaa;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.legend-dot.unlocked { background: #2a5f3f; border: 1px solid #c9a03d; }
+.legend-dot.locked { background: #1a4d2e; opacity: 0.5; }
+.legend-dot.completed { background: #4caf50; }
+.legend-dot.dungeon { background: #ff9800; }
+
+@media (max-width: 768px) {
+  .map-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .map-title-section {
+    justify-content: space-between;
+  }
+  
+  .location-modal {
+    width: 280px;
+  }
+  
+  .location-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+  
+  .map-location.dungeon .location-icon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Prérequis dans le modal */
+.location-requirements {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+}
+
+.location-requirements h4 {
+  font-size: 0.7rem;
+  color: #c9a03d;
+  margin: 0 0 0.5rem 0;
+}
+
+.requirements-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.requirement-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.65rem;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.requirement-badge.met {
+  color: #4caf50;
+  border-left: 2px solid #4caf50;
+}
+
+.requirement-badge.missing {
+  color: #f44336;
+  border-left: 2px solid #f44336;
+}
+
+/* Status des checks */
+.check-item {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease;
+}
+
+.check-item.accessible:hover {
+  background: rgba(76, 175, 80, 0.2);
+}
+
+.check-item.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.check-status {
+  margin-right: 0.5rem;
+}
+
+.check-desc {
+  font-size: 0.6rem;
+  color: #aaa;
+  margin-left: 0.5rem;
+}
+
+.check-requirements {
+  margin-left: 1.5rem;
+  font-size: 0.6rem;
+  color: #f44336;
+}
+
+/* Tooltip stats */
+.tooltip-stats {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  font-size: 0.65rem;
+}
+
+.tooltip-stats .completed { color: #4caf50; }
+.tooltip-stats .accessible { color: #ffc107; }
+.tooltip-stats .locked { color: #f44336; }
+
+.tooltip-requirements {
+  margin-top: 0.25rem;
+  font-size: 0.6rem;
+  color: #f44336;
+}
